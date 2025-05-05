@@ -10,6 +10,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
+        $per_page = $request->query('per_page', 5);
         $inventories = Inventory::all();
         return view('inventory.index', compact('inventories'));
     }
