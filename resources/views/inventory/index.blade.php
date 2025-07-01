@@ -27,7 +27,7 @@
                         <tbody>
                             @foreach($inventories as $key => $inventory)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="px-4 py-2 border-b dark:border-gray-700">{{$key + 1}}</td>
+                                <td class="px-4 py-2 border-b dark:border-gray-700">{{($inventories->currentPage() - 1) * $inventories->perPage() + $key + 1}}</td>
                                 <td class="px-4 py-2 border-b dark:border-gray-700">{{$inventory->name}}</td>
                                 <td class="px-4 py-2 border-b dark:border-gray-700">{{$inventory->qty}}</td>
                                 <td class="px-4 py-2 border-b dark:border-gray-700">{{$inventory->price}}</td>
@@ -45,6 +45,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="flex justify-center mt-6">
+                        {{ $inventories->links() }}
+                    </div>
                 </div>
             </div>
         </div>
