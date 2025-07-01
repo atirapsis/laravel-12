@@ -19,38 +19,55 @@ class InventoryController extends Controller
     {
         return view('inventory.create');
     }
+
     public function store(Request $request)
     {
-        Inventory::create([
-            'user_id' => Auth::id(),
-            'name' => $request->name,
-            'qty' => $request->qty,
-            'price' => $request->price,
-            'description' => $request->description,
+        $validated_data = $request->validate([
+            'name' => 'required|string|min:5|max:255',
+            'qty' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|min:5|max:255'
+        ], [
+            'name.required' => 'Item name is required.',
+            'name.min' => 'Item name must be at least 5 characters.',
+            'description.required' => 'Description is required.',
+            'description.min' => 'Description must be at least 5 characters.',
         ]);
 
+        $validated_data['user_id'] = Auth::id();
+        Inventory::create($validated_data);
         return redirect()->route('inventory.index');
     }
+
     public function edit(Inventory $inventory)
     {
         return view('inventory.edit', compact('inventory'));
     }
+
     public function update(Request $request, Inventory $inventory)
     {
-        $inventory->update([
-            'name' => $request->name,
-            'qty' => $request->qty,
-            'price' => $request->price,
-            'description' => $request->description,
+        $validated_data = $request->validate([
+            'name' => 'required|string|min:5|max:255',
+            'qty' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'description' => 'required|string|min:5|max:255',
+        ], [
+            'name.required' => 'Item name is required.',
+            'name.min' => 'Item name must be at least 5 characters.',
+            'description.required' => 'Description is required.',
+            'description.min' => 'Description must be at least 5 characters.',
         ]);
 
+        $inventory->update($validated_data);
         return redirect()->route('inventory.index');
     }
+
     public function destroy(Inventory $inventory)
     {
         $inventory->delete();
         return redirect()->route('inventory.index');
     }
+
     public function show(Inventory $inventory)
     {
         return view('inventory.show', compact('inventory'));
