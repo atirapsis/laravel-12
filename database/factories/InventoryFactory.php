@@ -16,10 +16,17 @@ class InventoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Inventory::class;
+
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::factory(),
+            'name' => $this->faker->word(),
+            'qty' => $this->faker->numberBetween(1, 100),
+            'price' => $this->faker->randomFloat(2, 10, 500),
+            'description' => $this->faker->sentence(),
         ];
     }
 }
