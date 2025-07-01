@@ -15,24 +15,36 @@
                             <label for="inputname" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Name</label>
                             <input type="text" id="inputname" name="name" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                        </div>
+                                @error('name')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror    
+                            </div>
 
                         <div class="mb-4">
                             <label for="inputqty" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Qty</label>
                             <input type="number" id="inputqty" name="qty" min="1" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                @error('qty')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror    
                         </div>
 
                         <div class="mb-4">
                             <label for="inputprice" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Price</label>
                             <input type="number" id="inputprice" name="price" step="0.01" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                @error('price')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror    
                         </div>
 
                         <div class="mb-6">
                             <label for="inputdescription" class="block text-sm font-medium text-gray-700 dark:text-gray-200">Description</label>
                             <input type="text" id="inputdescription" name="description" required
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:text-white focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                @error('description')
+                                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                         </div>
 
                         <button type="submit"
