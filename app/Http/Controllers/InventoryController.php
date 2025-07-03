@@ -12,7 +12,9 @@ class InventoryController extends Controller
     {
         $per_page = $request->query('per_page', 5);
         $inventories = Inventory::paginate($per_page);
-        return view('inventory.index', compact('inventories'));
+        $deletedInventories = Inventory::onlyTrashed()->paginate($per_page);
+
+        return view('inventory.index', compact('inventories', 'deletedInventories'));
     }
 
     public function create()
@@ -72,4 +74,21 @@ class InventoryController extends Controller
     {
         return view('inventory.show', compact('inventory'));
     }
+
+    public function restore($id)
+    {
+        $inventory = Inventory::withTrashed()->findOrFail($id);
+        $inventory->restore();
+
+        return redirect()->route('inventory.index');
+    }
+
+    public function forceDelete($id)
+    {
+    $inventory = Inventory::withTrashed()->findOrFail($id);
+    $inventory->forceDelete();
+
+    return redirect()->route('inventory.index')->with('success');
+    }
+
 }
