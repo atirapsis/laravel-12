@@ -43,6 +43,7 @@ class InventoryController extends Controller
 
     public function edit(Inventory $inventory)
     {
+        $this->authorize('update', $inventory);
         return view('inventory.edit', compact('inventory'));
     }
 
@@ -66,6 +67,7 @@ class InventoryController extends Controller
 
     public function destroy(Inventory $inventory)
     {
+        $this->authorize('delete', $inventory);
         $inventory->delete();
         return redirect()->route('inventory.index');
     }
