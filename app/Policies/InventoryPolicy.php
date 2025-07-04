@@ -11,16 +11,16 @@ class InventoryPolicy
      */
     public function view(User $user, Inventory $inventory)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $inventory->user_id;
     }
 
     public function update(User $user, Inventory $inventory)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $inventory->user_id;
     }
 
     public function delete(User $user, Inventory $inventory)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $inventory->user_id;
     }
 }

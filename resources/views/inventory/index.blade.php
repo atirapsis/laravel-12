@@ -38,7 +38,7 @@
                                     <form method="post" action="{{ route('inventory.destroy', $inventory) }}">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="bg-red-500 inline-block border border-white text-white py-2 px-4 rounded">Soft Delete</button>
+                                        <button type="submit" class="bg-red-500 inline-block border border-white text-white py-2 px-4 rounded">Delete</button>
                                     </form>
                                     <a href="{{ route('inventory.show', $inventory) }}" class="inline-block border border-white text-white py-2 px-4 rounded">Show</a>
                                 </td>
